@@ -44,6 +44,12 @@ const Index = () => {
             >
               О фестивале
             </button>
+            <button
+              onClick={() => scrollToSection('impact')}
+              className="text-foreground hover:text-primary transition-colors font-medium"
+            >
+              Наше влияние
+            </button>
           </div>
         </div>
       </nav>
@@ -226,6 +232,145 @@ const Index = () => {
                   className="rounded-2xl shadow-xl w-full h-auto object-cover"
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="impact" className="py-20 px-4 bg-gradient-to-b from-background to-primary/5">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">Наше влияние</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Измеримые результаты экологических изменений в цифрах
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            {[
+              { number: '5000+', label: 'Участников', icon: 'Users', color: 'from-primary to-secondary' },
+              { number: '2.5т', label: 'Вторсырья собрано', icon: 'Recycle', color: 'from-secondary to-accent' },
+              { number: '150+', label: 'Мастер-классов', icon: 'BookOpen', color: 'from-accent to-primary' },
+              { number: '30+', label: 'Экопартнёров', icon: 'Handshake', color: 'from-primary/80 to-secondary/80' },
+            ].map((stat, index) => (
+              <Card
+                key={index}
+                className="p-8 text-center bg-card rounded-2xl border-2 border-muted hover:shadow-2xl transition-all duration-300 animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`bg-gradient-to-br ${stat.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4`}>
+                  <Icon name={stat.icon} className="text-white" size={32} />
+                </div>
+                <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
+            <Card className="p-8 bg-card rounded-2xl border-2 border-muted animate-fade-in">
+              <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-3">
+                <Icon name="TrendingUp" size={28} />
+                Рост осознанности
+              </h3>
+              <div className="space-y-6">
+                {[
+                  { label: 'Раздельный сбор', percent: 85, color: 'bg-primary' },
+                  { label: 'Отказ от одноразового', percent: 72, color: 'bg-secondary' },
+                  { label: 'Осознанное потребление', percent: 68, color: 'bg-accent' },
+                  { label: 'Поддержка локальных', percent: 91, color: 'bg-primary/80' },
+                ].map((item, idx) => (
+                  <div key={idx}>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-foreground font-medium">{item.label}</span>
+                      <span className="text-primary font-bold">{item.percent}%</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
+                      <div
+                        className={`${item.color} h-full rounded-full transition-all duration-1000 ease-out animate-scale-in`}
+                        style={{ width: `${item.percent}%`, animationDelay: `${idx * 0.2}s` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-8 bg-card rounded-2xl border-2 border-muted animate-fade-in">
+              <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-3">
+                <Icon name="LineChart" size={28} />
+                Снижение углеродного следа
+              </h3>
+              <div className="space-y-8">
+                {[
+                  { year: '2022', value: 100, label: 'Базовый год' },
+                  { year: '2023', value: 75, label: '-25% выбросов' },
+                  { year: '2024', value: 48, label: '-52% выбросов' },
+                ].map((item, idx) => (
+                  <div key={idx} className="relative">
+                    <div className="flex items-end gap-4">
+                      <div className="flex-1">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-foreground font-semibold">{item.year}</span>
+                          <span className="text-muted-foreground text-sm">{item.label}</span>
+                        </div>
+                        <div className="w-full bg-muted rounded-full h-8 overflow-hidden">
+                          <div
+                            className="bg-gradient-to-r from-destructive via-secondary to-primary h-full rounded-full transition-all duration-1000 ease-out animate-scale-in"
+                            style={{ 
+                              width: `${item.value}%`, 
+                              animationDelay: `${idx * 0.3}s`,
+                              background: `linear-gradient(to right, ${idx === 0 ? '#ea384c' : idx === 1 ? '#7BA05B' : '#4A7C2F'})`
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 p-4 bg-primary/5 rounded-xl">
+                <p className="text-sm text-muted-foreground">
+                  За 2 года работы фестиваля участники снизили личный углеродный след более чем наполовину
+                </p>
+              </div>
+            </Card>
+          </div>
+
+          <div className="bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl p-12 animate-fade-in">
+            <h3 className="text-3xl font-bold mb-8 text-primary text-center">
+              Экологический эффект от мероприятий
+            </h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: 'Droplet',
+                  value: '180 000л',
+                  label: 'Воды сэкономлено',
+                  description: 'Благодаря переработке и повторному использованию',
+                },
+                {
+                  icon: 'TreePine',
+                  value: '320',
+                  label: 'Деревьев спасено',
+                  description: 'Эквивалент сохранённых лесных ресурсов',
+                },
+                {
+                  icon: 'Wind',
+                  value: '12.5т',
+                  label: 'CO₂ предотвращено',
+                  description: 'Снижение углеродного следа сообщества',
+                },
+              ].map((item, idx) => (
+                <div key={idx} className="text-center animate-fade-in" style={{ animationDelay: `${idx * 0.2}s` }}>
+                  <div className="bg-gradient-to-br from-primary to-secondary w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name={item.icon} className="text-white" size={36} />
+                  </div>
+                  <div className="text-4xl font-bold text-primary mb-2">{item.value}</div>
+                  <div className="text-lg font-semibold text-foreground mb-2">{item.label}</div>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
